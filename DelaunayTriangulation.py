@@ -91,6 +91,9 @@ class DelaunayTriangulation:
         self.point_set = np.array(self.point_set).reshape(num,2)
 
     def build_super_triangle(self):
+        self.triangles = []
+        self.temp_triangles = []
+        self.edge_buffer = []
         max_loc = np.max(self.point_set,0)
         min_loc = np.min(self.point_set,0)
         centerx = (max_loc[0]+min_loc[0])/2.0
@@ -102,9 +105,7 @@ class DelaunayTriangulation:
         left = np.array([centerx-width,min_loc[1]-10])
         self.super_triangle = Triangle(top,left,right)
         self.temp_triangles.append(self.super_triangle)
-        self.super_triangle.plot()
-        self.point_plot()
-        plt.show()
+
     def draw_tmp_triangle(self):
         for triangle in self.temp_triangles:
             triangle.plot()
